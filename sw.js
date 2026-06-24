@@ -1,6 +1,6 @@
 /* Service worker for the Bird Radio static shell. */
 
-const CACHE_NAME = "bird-radio-shell-v9-phrase-sequences";
+const CACHE_NAME = "bird-radio-shell-v10-credits-runtime";
 const SHELL_ASSETS = [
   "./",
   "./index.html",

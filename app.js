@@ -33,6 +33,9 @@
 
   const ROOM_PLAYBACK_BOOST_DB = 14;
   const AMBIENT_BED_DB = -35;
+  const SCHEDULER_INTERVAL_MS = 1000;
+  const MAX_PHRASES_PER_VOICE = 8;
+  const MAX_BUFFER_SOURCES_PER_EVENT = 10;
   const EARLY_DAWN_SPECIES = new Set([
     "common_blackbird",
     "blackbird",
@@ -240,6 +243,15 @@
 
   function buildAttribution(item) {
     return `${item.recordist} · ${item.license} · ${item.sourceLabel}`;
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   function normalizePhraseSequence(sequence) {
@@ -557,7 +569,7 @@
         const span = phrase.endSec - firstStart;
         if (selected.length && span > maxDuration) break;
         selected.push({ ...phrase });
-        if (selected.length >= 10 && span > maxDuration * 0.7) break;
+        if (selected.length >= MAX_PHRASES_PER_VOICE) break;
       }
       return selected.length ? selected : [{ ...sequence[startIndex] }];
     }
@@ -620,7 +632,7 @@
       pendingEvents: [],
       history: [],
       playing: false,
-      lookaheadSec: 8,
+      lookaheadSec: 12,
       queueCursorSec: 0,
       sessionStartTime: 0,
       timer: null,
@@ -632,6 +644,7 @@
       ambientBuffer: null,
       bufferCache: new Map(),
       maxCachedBuffers: 12,
+      lastDynamicRenderKey: "",
     };
     return state;
   }
@@ -714,6 +727,14 @@
             </div>
             <div class="attribution-list" data-attribution></div>
           </section>
+
+          <section class="credits-band" aria-label="Full credits">
+            <details>
+              <summary>Full audio credits</summary>
+              <p class="credits-note">All bundled bird recordings are credited per clip. Non-commercial ShareAlike license terms apply per source recording.</p>
+              <div class="credits-list" data-credits></div>
+            </details>
+          </section>
         </main>
       </div>
     `;
@@ -723,6 +744,7 @@
       statusText: root.querySelector("[data-status-text]"),
       nowPlaying: root.querySelector("[data-now-playing]"),
       attribution: root.querySelector("[data-attribution]"),
+      credits: root.querySelector("[data-credits]"),
       modeLine: root.querySelector("[data-mode-line]"),
       startButton: root.querySelector("[data-start]"),
       stopButton: root.querySelector("[data-stop]"),
@@ -730,6 +752,21 @@
       preset: root.querySelector("[data-preset]"),
       timeMode: root.querySelector("[data-time-mode]"),
     };
+  }
+
+  function dynamicRenderKey(state) {
+    return state.pendingEvents
+      .slice(0, 4)
+      .map((event) => `${event.clipId}:${round(event.startSec, 1)}`)
+      .join("|");
+  }
+
+  function renderDynamicPanels(state, force = false) {
+    const key = dynamicRenderKey(state);
+    if (!force && key === state.lastDynamicRenderKey) return;
+    state.lastDynamicRenderKey = key;
+    renderNowPlaying(state);
+    renderAttribution(state);
   }
 
   function renderNowPlaying(state) {
@@ -744,8 +781,8 @@
         const lead = index === 0 ? "current" : `next +${round(event.startSec - items[0].startSec, 1)}s`;
         return `
           <li class="now-item">
-            <span class="now-title">${event.ru}</span>
-            <span class="now-meta">${event.distanceLabel} · ${lead}</span>
+            <span class="now-title">${escapeHtml(event.ru)}</span>
+            <span class="now-meta">${escapeHtml(event.distanceLabel)} · ${escapeHtml(lead)}</span>
           </li>
         `;
       })
@@ -762,11 +799,37 @@
     list.innerHTML = items
       .map((event) => `
         <article class="attribution-item">
-          <strong>${event.ru}</strong>
-          <div>${event.attribution}</div>
-          <div class="meta">${event.sourceUrl}</div>
+          <strong>${escapeHtml(event.ru)}</strong>
+          <div>${escapeHtml(event.attribution)}</div>
+          <div class="meta"><a href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(event.sourceUrl)}</a></div>
         </article>
       `)
+      .join("");
+  }
+
+  function renderCredits(state) {
+    const clips = state.clipLibrary.slice().sort((left, right) => {
+      const species = String(left.ru || left.en).localeCompare(String(right.ru || right.en), "ru");
+      if (species) return species;
+      return String(left.clipId).localeCompare(String(right.clipId));
+    });
+    state.nodes.credits.innerHTML = clips
+      .map((clip) => {
+        const source = clip.sourceUrl || "";
+        const sourceText = source || clip.sourceLabel || "source";
+        const duration = Number.isFinite(Number(clip.durationSec)) ? `${round(Number(clip.durationSec), 1)}s` : "synthetic";
+        return `
+          <article class="credit-item">
+            <div>
+              <strong>${escapeHtml(clip.ru || clip.en || clip.speciesId)}</strong>
+              <span class="meta">${escapeHtml(clip.en || clip.speciesId)} · ${escapeHtml(clip.clipId)} · ${escapeHtml(duration)}</span>
+            </div>
+            <div>${escapeHtml(clip.recordist || "Unknown recordist")}</div>
+            <div>${escapeHtml(clip.license || "Unknown license")}</div>
+            <a href="${escapeHtml(source)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceText)}</a>
+          </article>
+        `;
+      })
       .join("");
   }
 
@@ -976,9 +1039,22 @@
     const nodeGroup = { carrier, overtone, gain, filter, panner };
     state.activeNodes.add(nodeGroup);
     const cleanupAt = (startAt + duration + 0.35 - audioContext.currentTime) * 1000;
-    global.setTimeout(() => {
+    const cleanup = () => {
       state.activeNodes.delete(nodeGroup);
-    }, Math.max(300, cleanupAt));
+      disconnectNodeGroup(nodeGroup);
+    };
+    carrier.onended = cleanup;
+    global.setTimeout(cleanup, Math.max(300, cleanupAt));
+  }
+
+  function disconnectNodeGroup(nodeGroup) {
+    for (const key of ["source", "carrier", "overtone", "filter", "gain", "panner"]) {
+      try {
+        if (nodeGroup[key]) nodeGroup[key].disconnect();
+      } catch (error) {
+        void error;
+      }
+    }
   }
 
   function createBufferSliceVoice(state, buffer, voiceEvent, startAt, offsetSec, durationSec) {
@@ -1013,15 +1089,19 @@
     const nodeGroup = { source, gain, panner };
     state.activeNodes.add(nodeGroup);
     const cleanupAt = (startAt + safeDuration + 0.35 - audioContext.currentTime) * 1000;
-    source.onended = () => state.activeNodes.delete(nodeGroup);
-    global.setTimeout(() => {
+    const cleanup = () => {
       state.activeNodes.delete(nodeGroup);
-    }, Math.max(300, cleanupAt));
+      disconnectNodeGroup(nodeGroup);
+    };
+    source.onended = cleanup;
+    global.setTimeout(cleanup, Math.max(300, cleanupAt));
   }
 
   async function createVoice(state, event) {
     const audioContext = state.audioContext;
-    const chorusSize = clamp(Math.round(event.chorusSize || 1), 1, 6);
+    const phraseCount = Array.isArray(event.phraseSequence) && event.phraseSequence.length ? Math.min(event.phraseSequence.length, MAX_PHRASES_PER_VOICE) : 1;
+    const maxChorusByNodeCap = Math.max(1, Math.floor(MAX_BUFFER_SOURCES_PER_EVENT / phraseCount));
+    const chorusSize = clamp(Math.round(event.chorusSize || 1), 1, Math.min(6, maxChorusByNodeCap));
     if (!event.audioFile || typeof fetch !== "function") {
       for (let index = 0; index < chorusSize; index += 1) {
         createSyntheticVoice(state, eventVoiceVariant(event, index, chorusSize));
@@ -1036,7 +1116,7 @@
         const voiceEvent = eventVoiceVariant(event, index, chorusSize);
         const plannedStart = state.sessionStartTime + voiceEvent.startSec;
         const startAt = Math.max(audioContext.currentTime + 0.02, plannedStart);
-        const phraseSequence = Array.isArray(voiceEvent.phraseSequence) ? voiceEvent.phraseSequence : [];
+        const phraseSequence = Array.isArray(voiceEvent.phraseSequence) ? voiceEvent.phraseSequence.slice(0, MAX_PHRASES_PER_VOICE) : [];
         if (phraseSequence.length) {
           const firstStart = phraseSequence[0].startSec;
           phraseSequence.forEach((phrase) => {
@@ -1083,8 +1163,7 @@
       }
       createVoice(state, event);
     }
-    renderNowPlaying(state);
-    renderAttribution(state);
+    renderDynamicPanels(state);
   }
 
   async function startPlayback(state) {
@@ -1099,11 +1178,10 @@
     state.playing = true;
     startAmbientBed(state);
     updateStatus(state, "playing", "Playing with continuous room bed and soft overlap.");
-    renderNowPlaying(state);
-    renderAttribution(state);
+    renderDynamicPanels(state, true);
     scheduleBatch(state);
     if (state.timer) global.clearInterval(state.timer);
-    state.timer = global.setInterval(() => scheduleBatch(state), 350);
+    state.timer = global.setInterval(() => scheduleBatch(state), SCHEDULER_INTERVAL_MS);
     requestWakeLock(state);
     applyMediaSession(state);
   }
@@ -1123,22 +1201,12 @@
       } catch (error) {
         void error;
       }
-      try {
-        if (nodeGroup.source) nodeGroup.source.disconnect();
-        if (nodeGroup.carrier) nodeGroup.carrier.disconnect();
-        if (nodeGroup.overtone) nodeGroup.overtone.disconnect();
-        if (nodeGroup.filter) nodeGroup.filter.disconnect();
-        if (nodeGroup.gain) nodeGroup.gain.disconnect();
-        if (nodeGroup.panner) nodeGroup.panner.disconnect();
-      } catch (error) {
-        void error;
-      }
+      disconnectNodeGroup(nodeGroup);
     }
     state.activeNodes.clear();
     state.pendingEvents = [];
     updateStatus(state, "idle", "Stopped. Tap Start to resume the room scene.");
-    renderNowPlaying(state);
-    renderAttribution(state);
+    renderDynamicPanels(state, true);
     releaseWakeLock(state);
     applyMediaSession(state);
   }
@@ -1189,8 +1257,8 @@
     const state = createPlayerState(root, manifest);
     renderApp(root, state);
     updateStatus(state, "idle", "Idle. Tap Start to resume the room scene.");
-    renderNowPlaying(state);
-    renderAttribution(state);
+    renderCredits(state);
+    renderDynamicPanels(state, true);
 
     state.nodes.startButton.addEventListener("click", () => {
       state.scheduler = new BirdRadioScheduler({
