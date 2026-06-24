@@ -1,0 +1,893 @@
+[
+  {
+    "id": "great_tit",
+    "ru": "Большая синица",
+    "en": "Great Tit",
+    "scientific": "Parus major",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "yard",
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 1.4,
+    "max_concurrent": 2
+  },
+  {
+    "id": "eurasian_blue_tit",
+    "ru": "Лазоревка",
+    "en": "Eurasian Blue Tit",
+    "scientific": "Cyanistes caeruleus",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 1.2,
+    "max_concurrent": 2
+  },
+  {
+    "id": "coal_tit",
+    "ru": "Московка",
+    "en": "Coal Tit",
+    "scientific": "Periparus ater",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 2
+  },
+  {
+    "id": "long_tailed_tit",
+    "ru": "Длиннохвостая синица",
+    "en": "Long-tailed Tit",
+    "scientific": "Aegithalos caudatus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 4
+  },
+  {
+    "id": "eurasian_nuthatch",
+    "ru": "Поползень",
+    "en": "Eurasian Nuthatch",
+    "scientific": "Sitta europaea",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.9,
+    "max_concurrent": 2
+  },
+  {
+    "id": "eurasian_treecreeper",
+    "ru": "Пищуха",
+    "en": "Eurasian Treecreeper",
+    "scientific": "Certhia familiaris",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "wooded_park"
+    ],
+    "base_weight": 0.5,
+    "max_concurrent": 1
+  },
+  {
+    "id": "eurasian_wren",
+    "ru": "Крапивник",
+    "en": "Eurasian Wren",
+    "scientific": "Troglodytes troglodytes",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_core",
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 1
+  },
+  {
+    "id": "european_robin",
+    "ru": "Зарянка",
+    "en": "European Robin",
+    "scientific": "Erithacus rubecula",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 1.0,
+    "max_concurrent": 1
+  },
+  {
+    "id": "common_chaffinch",
+    "ru": "Зяблик",
+    "en": "Common Chaffinch",
+    "scientific": "Fringilla coelebs",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 1.1,
+    "max_concurrent": 2
+  },
+  {
+    "id": "european_greenfinch",
+    "ru": "Зеленушка",
+    "en": "European Greenfinch",
+    "scientific": "Chloris chloris",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 4
+  },
+  {
+    "id": "european_goldfinch",
+    "ru": "Щегол",
+    "en": "European Goldfinch",
+    "scientific": "Carduelis carduelis",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 4
+  },
+  {
+    "id": "eurasian_siskin",
+    "ru": "Чиж",
+    "en": "Eurasian Siskin",
+    "scientific": "Spinus spinus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.6,
+    "max_concurrent": 4
+  },
+  {
+    "id": "eurasian_bullfinch",
+    "ru": "Снегирь",
+    "en": "Eurasian Bullfinch",
+    "scientific": "Pyrrhula pyrrhula",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 2
+  },
+  {
+    "id": "common_blackbird",
+    "ru": "Чёрный дрозд",
+    "en": "Common Blackbird",
+    "scientific": "Turdus merula",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "dusk"
+    ],
+    "habitat": [
+      "yard",
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 1.2,
+    "max_concurrent": 1
+  },
+  {
+    "id": "song_thrush",
+    "ru": "Певчий дрозд",
+    "en": "Song Thrush",
+    "scientific": "Turdus philomelos",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.9,
+    "max_concurrent": 1
+  },
+  {
+    "id": "fieldfare",
+    "ru": "Дрозд-рябинник",
+    "en": "Fieldfare",
+    "scientific": "Turdus pilaris",
+    "behavior": "flock",
+    "season": [
+      "autumn",
+      "winter",
+      "spring"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 4
+  },
+  {
+    "id": "redwing",
+    "ru": "Белобровик",
+    "en": "Redwing",
+    "scientific": "Turdus iliacus",
+    "behavior": "flock",
+    "season": [
+      "autumn",
+      "winter",
+      "spring"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.6,
+    "max_concurrent": 4
+  },
+  {
+    "id": "european_starling",
+    "ru": "Скворец",
+    "en": "European Starling",
+    "scientific": "Sturnus vulgaris",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 1.0,
+    "max_concurrent": 4
+  },
+  {
+    "id": "eurasian_blackcap",
+    "ru": "Славка-черноголовка",
+    "en": "Eurasian Blackcap",
+    "scientific": "Sylvia atricapilla",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 1
+  },
+  {
+    "id": "garden_warbler",
+    "ru": "Садовая славка",
+    "en": "Garden Warbler",
+    "scientific": "Sylvia borin",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.5,
+    "max_concurrent": 1
+  },
+  {
+    "id": "common_chiffchaff",
+    "ru": "Пеночка-теньковка",
+    "en": "Common Chiffchaff",
+    "scientific": "Phylloscopus collybita",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.9,
+    "max_concurrent": 1
+  },
+  {
+    "id": "willow_warbler",
+    "ru": "Пеночка-весничка",
+    "en": "Willow Warbler",
+    "scientific": "Phylloscopus trochilus",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.9,
+    "max_concurrent": 1
+  },
+  {
+    "id": "spotted_flycatcher",
+    "ru": "Серая мухоловка",
+    "en": "Spotted Flycatcher",
+    "scientific": "Muscicapa striata",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.5,
+    "max_concurrent": 2
+  },
+  {
+    "id": "common_redstart",
+    "ru": "Горихвостка обыкновенная",
+    "en": "Common Redstart",
+    "scientific": "Phoenicurus phoenicurus",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.6,
+    "max_concurrent": 1
+  },
+  {
+    "id": "thrush_nightingale",
+    "ru": "Соловей обыкновенный",
+    "en": "Thrush Nightingale",
+    "scientific": "Luscinia luscinia",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "dawn_core",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.5,
+    "max_concurrent": 1
+  },
+  {
+    "id": "eurasian_golden_oriole",
+    "ru": "Иволга",
+    "en": "Eurasian Golden Oriole",
+    "scientific": "Oriolus oriolus",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.4,
+    "max_concurrent": 1
+  },
+  {
+    "id": "common_cuckoo",
+    "ru": "Кукушка",
+    "en": "Common Cuckoo",
+    "scientific": "Cuculus canorus",
+    "behavior": "solo",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.4,
+    "max_concurrent": 1
+  },
+  {
+    "id": "white_wagtail",
+    "ru": "Белая трясогузка",
+    "en": "White Wagtail",
+    "scientific": "Motacilla alba",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 2
+  },
+  {
+    "id": "great_spotted_woodpecker",
+    "ru": "Большой пёстрый дятел",
+    "en": "Great Spotted Woodpecker",
+    "scientific": "Dendrocopos major",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 2
+  },
+  {
+    "id": "eurasian_jay",
+    "ru": "Сойка",
+    "en": "Eurasian Jay",
+    "scientific": "Garrulus glandarius",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 2
+  },
+  {
+    "id": "eurasian_magpie",
+    "ru": "Сорока",
+    "en": "Eurasian Magpie",
+    "scientific": "Pica pica",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 1.0,
+    "max_concurrent": 2
+  },
+  {
+    "id": "hooded_crow",
+    "ru": "Серая ворона",
+    "en": "Hooded Crow",
+    "scientific": "Corvus cornix",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.9,
+    "max_concurrent": 4
+  },
+  {
+    "id": "western_jackdaw",
+    "ru": "Галка",
+    "en": "Western Jackdaw",
+    "scientific": "Coloeus monedula",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 4
+  },
+  {
+    "id": "rook",
+    "ru": "Грач",
+    "en": "Rook",
+    "scientific": "Corvus frugilegus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 4
+  },
+  {
+    "id": "house_sparrow",
+    "ru": "Домовый воробей",
+    "en": "House Sparrow",
+    "scientific": "Passer domesticus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "yard"
+    ],
+    "base_weight": 1.5,
+    "max_concurrent": 4
+  },
+  {
+    "id": "eurasian_tree_sparrow",
+    "ru": "Полевой воробей",
+    "en": "Eurasian Tree Sparrow",
+    "scientific": "Passer montanus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_core",
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 1.0,
+    "max_concurrent": 4
+  },
+  {
+    "id": "rock_dove",
+    "ru": "Сизый голубь",
+    "en": "Rock Dove",
+    "scientific": "Columba livia",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 4
+  },
+  {
+    "id": "wood_pigeon",
+    "ru": "Вяхирь",
+    "en": "Common Wood Pigeon",
+    "scientific": "Columba palumbus",
+    "behavior": "pair_small",
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ],
+    "activity": [
+      "dawn_early",
+      "dawn_core",
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "wooded_park"
+    ],
+    "base_weight": 0.8,
+    "max_concurrent": 2
+  },
+  {
+    "id": "common_swift",
+    "ru": "Чёрный стриж",
+    "en": "Common Swift",
+    "scientific": "Apus apus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "activity": [
+      "day"
+    ],
+    "habitat": [
+      "yard",
+      "park"
+    ],
+    "base_weight": 0.7,
+    "max_concurrent": 4
+  },
+  {
+    "id": "black_headed_gull",
+    "ru": "Озёрная чайка",
+    "en": "Black-headed Gull",
+    "scientific": "Chroicocephalus ridibundus",
+    "behavior": "flock",
+    "season": [
+      "spring",
+      "summer",
+      "autumn"
+    ],
+    "activity": [
+      "day",
+      "dusk"
+    ],
+    "habitat": [
+      "park",
+      "yard"
+    ],
+    "base_weight": 0.6,
+    "max_concurrent": 4
+  }
+]
